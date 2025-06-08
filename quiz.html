@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>戀愛風格測驗</title>
+  <style>
+    body {
+      background-color: #dbeafe;
+      font-family: "Helvetica Neue", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    #quiz-container {
+      width: 100%;
+      max-width: 600px;
+    }
+    #question {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      display: block;
+      text-align: left;
+    }
+    .option-button {
+      background-color: #93c5fd;
+      border: none;
+      border-radius: 9999px;
+      padding: 12px 24px;
+      margin: 10px 0;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+    .option-button:hover {
+      background-color: #60a5fa;
+    }
+  </style>
+</head>
+<body>
+  <div id="quiz-container">
+    <div id="question"></div>
+    <div id="options"></div>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        "question": "假日突然空出來，你會怎麼安排跟喜歡的人相處？",
+        "options": [
+          { "text": "一起去約會景點拍拍照吃甜點", "type": "rabbit" },
+          { "text": "帶他去一個沒人知道的小秘境", "type": "fox" },
+          { "text": "在家煮飯看劇，有人陪就夠了", "type": "bear" },
+          { "text": "先各自休息，晚上再分享彼此的生活", "type": "turtle" },
+          { "text": "隨機抽一個城市搭車出去玩！", "type": "squirrel" },
+          { "text": "直接黏在對方身上，不讓他滑手機", "type": "cat" }
+        ]
+      },
+      {
+        "question": "如果對方傳訊息給你，你最在意的是？",
+        "options": [
+          { "text": "語氣甜不甜，有沒有小表情", "type": "rabbit" },
+          { "text": "回得快不快、有沒有在專注我", "type": "cat" },
+          { "text": "有沒有內容、有沒有提到我的事", "type": "bear" },
+          { "text": "有沒有問我最近好不好", "type": "turtle" }
+        ]
+      },
+      {
+        "question": "你最想收到什麼情人節禮物？",
+        "options": [
+          { "text": "手寫情書 + 手工卡片", "type": "rabbit" },
+          { "text": "一場說走就走的小旅行", "type": "fox" },
+          { "text": "對方願意請假陪我一整天", "type": "bear" },
+          { "text": "用心準備但不需要貴重的東西", "type": "turtle" },
+          { "text": "專屬我們的祕密任務 or 小挑戰", "type": "squirrel" }
+        ]
+      },
+      {
+        "question": "曖昧對象突然冷淡了，你會？",
+        "options": [
+          { "text": "瘋狂回想哪裡做錯", "type": "rabbit" },
+          { "text": "覺得無聊就換人了", "type": "fox" },
+          { "text": "試著找機會好好問清楚", "type": "bear" },
+          { "text": "觀察幾天再決定要不要追問", "type": "turtle" }
+        ]
+      },
+      {
+        "question": "跟喜歡的人一起走在路上，你的動作是？",
+        "options": [
+          { "text": "自然牽手，晃來晃去", "type": "rabbit" },
+          { "text": "有點距離但默默守著", "type": "turtle" },
+          { "text": "整路聊天分享小故事", "type": "squirrel" },
+          { "text": "偶爾偷看他，心裡亂跳", "type": "cat" }
+        ]
+      },
+      {
+        "question": "如果有天你們開始遠距離，你的心情會是？",
+        "options": [
+          { "text": "有點不安，但想保持浪漫", "type": "rabbit" },
+          { "text": "好奇這段關係會怎麼變化", "type": "fox" },
+          { "text": "會擔心，但願意努力經營", "type": "bear" },
+          { "text": "覺得可以慢慢調整彼此的節奏", "type": "turtle" }
+        ]
+      },
+      {
+        "question": "對你來說，戀愛是什麼？",
+        "options": [
+          { "text": "是一種心動的期待", "type": "rabbit" },
+          { "text": "是一起經歷世界", "type": "fox" },
+          { "text": "是一種陪伴與信任", "type": "bear" },
+          { "text": "是兩人慢慢變好的旅程", "type": "turtle" }
+        ]
+      },
+      {
+        "question": "當你不開心時，你最希望對方怎麼做？",
+        "options": [
+          { "text": "馬上發現並哄我", "type": "cat" },
+          { "text": "給我空間，但適時關心", "type": "fox" },
+          { "text": "安靜地陪著我，不說太多", "type": "bear" },
+          { "text": "傾聽我講完再給建議", "type": "turtle" }
+        ]
+      },
+      {
+        "question": "你怎麼看「承諾」？",
+        "options": [
+          { "text": "一定要說出口才算數", "type": "rabbit" },
+          { "text": "行動比承諾更重要", "type": "fox" },
+          { "text": "想清楚再給承諾，也會努力做到", "type": "bear" },
+          { "text": "可以慢慢變成默契，不需講太多", "type": "turtle" }
+        ]
+      },
+      {
+        "question": "理想的晚安訊息是？",
+        "options": [
+          { "text": "「晚安寶寶～想你喔」", "type": "cat" },
+          { "text": "「今天好累但有你陪我真好」", "type": "bear" },
+          { "text": "「我們明天再一起做點什麼」", "type": "squirrel" },
+          { "text": "「今天過得怎麼樣？下次跟我說唷」", "type": "turtle" }
+        ]
+      },
+      {
+        "question": "你覺得對方喜歡你，會怎麼表現？",
+        "options": [
+          { "text": "常常傳訊問候，話中藏甜", "type": "rabbit" },
+          { "text": "拉你一起嘗試新事物", "type": "fox" },
+          { "text": "提醒你吃飯、注意身體", "type": "bear" },
+          { "text": "會記得你不說的小細節", "type": "turtle" }
+        ]
+      },
+      {
+        "question": "你喜歡哪一種約會氣氛？",
+        "options": [
+          { "text": "一起去夜市玩小遊戲", "type": "squirrel" },
+          { "text": "穿情侶裝去拍貼", "type": "rabbit" },
+          { "text": "喝咖啡聊人生", "type": "turtle" },
+          { "text": "開車兜風 + 播歌放空", "type": "fox" }
+        ]
+      }
+    ];
+
+    let currentQuestion = 0;
+    const scores = { rabbit: 0, fox: 0, bear: 0, turtle: 0, cat: 0, squirrel: 0 };
+
+    const questionEl = document.getElementById("question");
+    const optionsEl = document.getElementById("options");
+
+    function showQuestion(index) {
+      const q = quizData[index];
+      questionEl.textContent = `第 ${index + 1} 題：` + q.question;
+      optionsEl.innerHTML = "";
+
+      q.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option.text;
+        btn.className = "option-button";
+        btn.onclick = () => {
+          scores[option.type]++;
+          currentQuestion++;
+          if (currentQuestion < quizData.length) {
+            showQuestion(currentQuestion);
+          } else {
+            const result = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+            localStorage.setItem("loveStyleResult", result);
+            window.location.href = "result.html";
+          }
+        };
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    showQuestion(currentQuestion);
+  </script>
+</body>
+</html>

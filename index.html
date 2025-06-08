@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>戀愛風格測驗｜首頁</title>
+  <style>
+    body {
+      background-color: #e0f2fe;
+      font-family: "Helvetica Neue", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #1e3a8a;
+      margin-bottom: 24px;
+    }
+
+    .start-btn {
+      background-color: #38bdf8;
+      color: white;
+      border: none;
+      border-radius: 9999px;
+      padding: 14px 32px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .start-btn:hover {
+      background-color: #0ea5e9;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔮 10題揭開你的戀愛風格！看你是六型中哪一型 💘</h1>
+  <button class="start-btn" onclick="startQuiz()">開始測驗</button>
+
+  <script>
+    function startQuiz() {
+      window.location.href = "quiz.html";
+    }
+  </script>
+</body>
+</html>
